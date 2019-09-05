@@ -1,5 +1,4 @@
 
-
 package io.apihub.client.api;
 
 import io.apihub.client.ApiClient;
@@ -18,74 +17,68 @@ import okhttp3.OkHttpClient;
 
 import org.junit.Test;
 import org.junit.Before;
-import org.junit.Ignore;
-
 import org.junit.Assert;
 
 import java.util.concurrent.TimeUnit;
 
 public class ReporteDeCrditoConFicoScoreApiTest {
-    private final ReporteDeCrditoConFicoScoreApi api = new ReporteDeCrditoConFicoScoreApi();
-    private ApiClient apiClient;
+	private final ReporteDeCrditoConFicoScoreApi api = new ReporteDeCrditoConFicoScoreApi();
+	private ApiClient apiClient;
 
-    @Before()
-    public void setUp() {
-        this.apiClient = api.getApiClient();
+	@Before()
+	public void setUp() {
+		this.apiClient = api.getApiClient();
 
-        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .readTimeout(30, TimeUnit.SECONDS)
-                .addInterceptor(new SignerInterceptor())
-                .build();
-        apiClient.setHttpClient(okHttpClient);
-    }
-    
-    
-    @Test
-    public void getReporteTest() throws ApiException {
-        String xApiKey = "XXXXXXXXXXXXXXXXXXX";
-        String username = "XXXXXXXXX";
-        String password = "XXXXXXXXX";
-        
-        PersonaPeticion body = new PersonaPeticion();
-        body.setPrimerNombre("XXXXXXXXX");
-        body.setApellidoPaterno("XXXXXXXXX");
-        body.setApellidoMaterno("XXXXXXXXX");
-        body.setFechaNacimiento("YYYY-MM-DD");
-        body.setRfc("XXXXXXXXX");
-        Domicilio dom = new Domicilio();
-        dom.setDireccion("XXXXXXXXXXX");
-        dom.setColonia("XXXXXXXXX");
-        dom.setMunicipio("XXXXXXXXX");
-        dom.setCiudad("XXXXXXXXX");
-        dom.setEstado(CatalogoEstados.GTO);
-        dom.setCodigoPostal("XXXXXX");
+		OkHttpClient okHttpClient = new OkHttpClient().newBuilder().readTimeout(30, TimeUnit.SECONDS)
+				.addInterceptor(new SignerInterceptor()).build();
+		apiClient.setHttpClient(okHttpClient);
+	}
 
-        body.setDomicilio(dom);
-        
-        Boolean xFullReport = false;
-        Respuesta response = api.getReporte(xApiKey, username, password, body, xFullReport);
-        
-        Assert.assertTrue(response.getFolioConsulta()!=null);
-        
-        if(response.getFolioConsulta()!=null) {
-        	String folioConsulta = response.getFolioConsulta();
-        	
-        	Consultas consultas = api.getConsultas(folioConsulta, xApiKey, username, password);
-        	Assert.assertTrue(consultas.getConsultas() != null);
-        	
-        	Creditos creditos = api.getCreditos(folioConsulta, xApiKey, username, password);
-        	Assert.assertTrue(creditos.getCreditos() != null);
-        	
-        	Domicilios domicilios = api.getDomicilios(folioConsulta, xApiKey, username, password);
-        	Assert.assertTrue(domicilios.getDomicilios() != null);
-        	
-        	Empleos empleos = api.getEmpleos(folioConsulta, xApiKey, username, password);
-        	Assert.assertTrue(empleos.getEmpleos() != null);
-        	
-        	Scores scores = api.getScores(folioConsulta, xApiKey, username, password);
-        	Assert.assertTrue(scores.getScores() != null);
-        }
-        
-        
-    }
+	@Test
+	public void getReporteTest() throws ApiException {
+		String xApiKey = "XXXXXXXXXXXXXXXXXXX";
+		String username = "XXXXXXXXX";
+		String password = "XXXXXXXXX";
+
+		PersonaPeticion body = new PersonaPeticion();
+		body.setPrimerNombre("XXXXXXXXX");
+		body.setApellidoPaterno("XXXXXXXXX");
+		body.setApellidoMaterno("XXXXXXXXX");
+		body.setFechaNacimiento("YYYY-MM-DD");
+		body.setRfc("XXXXXXXXX");
+		Domicilio dom = new Domicilio();
+		dom.setDireccion("XXXXXXXXXXX");
+		dom.setColonia("XXXXXXXXX");
+		dom.setMunicipio("XXXXXXXXX");
+		dom.setCiudad("XXXXXXXXX");
+		dom.setEstado(CatalogoEstados.GTO);
+		dom.setCodigoPostal("XXXXXX");
+
+		body.setDomicilio(dom);
+
+		Boolean xFullReport = false;
+		Respuesta response = api.getReporte(xApiKey, username, password, body, xFullReport);
+
+		Assert.assertTrue(response.getFolioConsulta() != null);
+
+		if (response.getFolioConsulta() != null) {
+			String folioConsulta = response.getFolioConsulta();
+
+			Consultas consultas = api.getConsultas(folioConsulta, xApiKey, username, password);
+			Assert.assertTrue(consultas.getConsultas() != null);
+
+			Creditos creditos = api.getCreditos(folioConsulta, xApiKey, username, password);
+			Assert.assertTrue(creditos.getCreditos() != null);
+
+			Domicilios domicilios = api.getDomicilios(folioConsulta, xApiKey, username, password);
+			Assert.assertTrue(domicilios.getDomicilios() != null);
+
+			Empleos empleos = api.getEmpleos(folioConsulta, xApiKey, username, password);
+			Assert.assertTrue(empleos.getEmpleos() != null);
+
+			Scores scores = api.getScores(folioConsulta, xApiKey, username, password);
+			Assert.assertTrue(scores.getScores() != null);
+		}
+
+	}
 }
