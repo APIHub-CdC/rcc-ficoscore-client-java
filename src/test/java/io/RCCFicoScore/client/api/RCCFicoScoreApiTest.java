@@ -59,7 +59,7 @@ public class RCCFicoScoreApiTest {
 	    persona.setFechaNacimiento("1952-05-13");
 	    persona.setRFC("PAMP010101");
 	    persona.setCURP(null);
-	    persona.setNacionalidad(null);
+	    persona.setNacionalidad("MX");
 	    persona.setResidencia(null);
 	    persona.setEstadoCivil(null);
 	    persona.setSexo(null);

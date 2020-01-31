@@ -26,7 +26,7 @@ public class PersonaRespuesta {
   @SerializedName("CURP")
   private String CURP = null;
   @SerializedName("numeroSeguridadSocial")
-  private Integer numeroSeguridadSocial = null;
+  private String numeroSeguridadSocial = null;
   @SerializedName("nacionalidad")
   private String nacionalidad = null;
   @SerializedName("residencia")
@@ -125,16 +125,16 @@ public class PersonaRespuesta {
   public void setCURP(String CURP) {
     this.CURP = CURP;
   }
-  public PersonaRespuesta numeroSeguridadSocial(Integer numeroSeguridadSocial) {
+  public PersonaRespuesta numeroSeguridadSocial(String numeroSeguridadSocial) {
     this.numeroSeguridadSocial = numeroSeguridadSocial;
     return this;
   }
    
   @ApiModelProperty(example = "990099000099", value = "Debe colocar el número con el que el acreditado se encuentra afiliado a una institución de seguro social, el cual se compone por 11 caracteres Solo aplica para INFONAVIT y FOVISSSTE")
-  public Integer getNumeroSeguridadSocial() {
+  public String getNumeroSeguridadSocial() {
     return numeroSeguridadSocial;
   }
-  public void setNumeroSeguridadSocial(Integer numeroSeguridadSocial) {
+  public void setNumeroSeguridadSocial(String numeroSeguridadSocial) {
     this.numeroSeguridadSocial = numeroSeguridadSocial;
   }
   public PersonaRespuesta nacionalidad(String nacionalidad) {

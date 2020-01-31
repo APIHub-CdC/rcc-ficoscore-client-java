@@ -26,7 +26,7 @@ public class DomicilioRespuesta {
   @SerializedName("fechaResidencia")
   private String fechaResidencia = null;
   @SerializedName("numeroTelefono")
-  private Integer numeroTelefono = null;
+  private String numeroTelefono = null;
   @SerializedName("tipoDomicilio")
   private CatalogoTipoDomicilio tipoDomicilio = null;
   @SerializedName("tipoAsentamiento")
@@ -125,16 +125,16 @@ public class DomicilioRespuesta {
   public void setFechaResidencia(String fechaResidencia) {
     this.fechaResidencia = fechaResidencia;
   }
-  public DomicilioRespuesta numeroTelefono(Integer numeroTelefono) {
+  public DomicilioRespuesta numeroTelefono(String numeroTelefono) {
     this.numeroTelefono = numeroTelefono;
     return this;
   }
    
   @ApiModelProperty(value = "Debe de contener una longitud mínima de 5 caracteres. Cada carácter debe ser un número de 0-9, si se ingresa cualquier otro carácter el registro será rechazado.")
-  public Integer getNumeroTelefono() {
+  public String getNumeroTelefono() {
     return numeroTelefono;
   }
-  public void setNumeroTelefono(Integer numeroTelefono) {
+  public void setNumeroTelefono(String numeroTelefono) {
     this.numeroTelefono = numeroTelefono;
   }
   public DomicilioRespuesta tipoDomicilio(CatalogoTipoDomicilio tipoDomicilio) {
