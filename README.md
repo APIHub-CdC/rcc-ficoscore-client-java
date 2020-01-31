@@ -112,75 +112,99 @@ key_alias=cdc
 key_password=your_super_secure_password
 ```
 ### Paso 5. Modificar URL
+En el archivo RCCFicoScoreApiTest.java, que se encuentra en ***src/test/java/RCCFicoScoreApiTest.java***. Se deberá modificar los datos de la petición y de la URL para el consumo de la API en setBasePath("the_url"), como se muestra en el siguiente fragmento de código con los datos correspondientes:
 
-Modificar la URL de la petición e
 ```java
-public class ApiClient {
-    private String basePath = "the_url";
-    private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
-    private String tempFolderPath = null;
-    private JSON json;
-```
-### Paso 6. Capturar los datos de la petición
+private final RCCFicoScoreApi api = new RCCFicoScoreApi();
+private Logger logger = LoggerFactory.getLogger(RCCFicoScoreApiTest.class.getName());
 
-En el archiv
-```java
-private final PruebaDeSeguridadApi api = new PruebaDeSeguridadApi();
 private ApiClient apiClient;
+	
+
 @Before()
 public void setUp() {
-  this.apiClient = api.getApiClient();
-OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-    .readTimeout(30, TimeUnit.SECONDS)
-    .addInterceptor(new SignerInterceptor())
-    .build();
-apiClient.setHttpClient(okHttpClient);
+	this.apiClient = api.getApiClient();
+	this.apiClient.setBasePath("the_url");
+	OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+		    .readTimeout(30, TimeUnit.SECONDS)
+		    .addInterceptor(new SignerInterceptor())
+		    .build();
+		apiClient.setHttpClient(okHttpClient);
 }
+
 @Test
 public void getReporteTest() throws ApiException {
-    String xApiKey = "XXXXXXXXXXXXXXXXXXX";
-    String username = "XXXXXXXXX";
-    String password = "XXXXXXXXX";
-    
-    PersonaPeticion body = new PersonaPeticion();
-    body.setPrimerNombre("XXXXXXXXX");
-    body.setApellidoPaterno("XXXXXXXXX");
-    body.setApellidoMaterno("XXXXXXXXX");
-    body.setFechaNacimiento("YYYY-MM-DD");
-    body.setRfc("XXXXXXXXX");
-    Domicilio dom = new Domicilio();
-    dom.setDireccion("XXXXXXXXXXX");
-    dom.setColonia("XXXXXXXXX");
-    dom.setMunicipio("XXXXXXXXX");
-    dom.setCiudad("XXXXXXXXX");
-    dom.setEstado(CatalogoEstados.GTO);
-    dom.setCodigoPostal("XXXXXX");
+	
+	String xApiKey = "your_api_key";
+	String username = "your_username";
+	String password = "your_password";
+	Boolean xFullReport = false;
 
-    body.setDomicilio(dom);
+	PersonaPeticion persona = new PersonaPeticion();
+	DomicilioPeticion domicilio = new DomicilioPeticion();
+	
+	persona.setApellidoPaterno("PATERNO");
+	persona.setApellidoMaterno("MATERNO");
+	persona.setApellidoAdicional(null);
+	persona.setPrimerNombre("PRIMERNOMBRE");
+    persona.setSegundoNombre(null);
+    persona.setFechaNacimiento("1952-05-13");
+    persona.setRFC("PAMP010101");
+    persona.setCURP(null);
+    persona.setNacionalidad(null);
+    persona.setResidencia(null);
+    persona.setEstadoCivil(null);
+    persona.setSexo(null);
+    persona.setClaveElectorIFE(null);
+    persona.setNumeroDependientes(null);
+    persona.setFechaDefuncion(null);
+    persona.setDomicilio(null);
+	
     
-    Boolean xSegmentedReport = true;
-    Respuesta response = api.getReporte(xApiKey, username, password, body, xSegmentedReport);
-    
-    Assert.assertTrue(response.getFolioConsulta()!=null);
-    
-    if(response.getFolioConsulta()!=null) {
-      String folioConsulta = response.getFolioConsulta();
-      
-      Consultas consultas = api.getConsultas(folioConsulta, xApiKey, username, password);
-      Assert.assertTrue(consultas.getConsultas() != null);
-      
-      Creditos creditos = api.getCreditos(folioConsulta, xApiKey, username, password);
-      Assert.assertTrue(creditos.getCreditos() != null);
-      
-      Domicilios domicilios = api.getDomicilios(folioConsulta, xApiKey, username, password);
-      Assert.assertTrue(domicilios.getDomicilios() != null);
-      
-      Empleos empleos = api.getEmpleos(folioConsulta, xApiKey, username, password);
-      Assert.assertTrue(empleos.getEmpleos() != null);
-    } 
-}
+	domicilio.setDireccion("HIDALGO 32");
+	domicilio.setColoniaPoblacion("CENTRO");
+	domicilio.setDelegacionMunicipio("LA BARCA");
+	domicilio.setCiudad("BENITO JUAREZ");
+	domicilio.setEstado(CatalogoEstados.JAL);
+	domicilio.setCP("47917");
+	domicilio.setFechaResidencia(null);
+	domicilio.setNumeroTelefono(null);
+	domicilio.setTipoDomicilio(null);
+	domicilio.setTipoAsentamiento(null);
+	
+	persona.setDomicilio(domicilio);
+	
+	Respuesta response = api.getReporte(xApiKey, username, password, persona, xFullReport);
+
+	Assert.assertTrue(response.getFolioConsulta() != null);
+	
+	logger.info(response.toString());
+
+	if (response.getFolioConsulta() != null && !xFullReport ) {
+		String folioConsulta = response.getFolioConsulta();
+
+		Consultas consultas2 = api.getConsultas(folioConsulta, xApiKey, username, password);
+		Assert.assertTrue(consultas2.getConsultas() != null);
+
+		Creditos creditos = api.getCreditos(folioConsulta, xApiKey, username, password);
+		Assert.assertTrue(creditos.getCreditos() != null);
+
+		DomiciliosRespuesta domicilios = api.getDomicilios(folioConsulta, xApiKey, username, password);
+		Assert.assertTrue(domicilios.getDomicilios() != null);
+
+		Empleos empleos = api.getEmpleos(folioConsulta, xApiKey, username, password);
+		Assert.assertTrue(empleos.getEmpleos() != null);
+
+		Scores scores = api.getScores(folioConsulta, xApiKey, username, password);
+		Assert.assertTrue(scores.getScores() != null);
+		
+		Mensajes mensajes = api.getMensajes(folioConsulta, xApiKey, username, password);
+		Assert.assertTrue(mensajes.getMensajes() != null);
+	}
+
+}	
 ```
-### Paso 7. Ejecutar la prueba unitaria
+### Paso 6. Ejecutar la prueba unitaria
 
 Teniendo los pasos anteriores ya solo falta ejecutar la prueba unitaria, con el siguiente comando:
 ```shell
