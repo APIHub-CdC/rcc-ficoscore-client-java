@@ -24,7 +24,7 @@ public class Consulta {
   @SerializedName("direccionOtorgante")
   private String direccionOtorgante = null;
   @SerializedName("telefonoOtorgante")
-  private Integer telefonoOtorgante = null;
+  private String telefonoOtorgante = null;
   @SerializedName("tipoCredito")
   private String tipoCredito = null;
   @SerializedName("claveUnidadMonetaria")
@@ -122,16 +122,16 @@ public class Consulta {
   public void setDireccionOtorgante(String direccionOtorgante) {
     this.direccionOtorgante = direccionOtorgante;
   }
-  public Consulta telefonoOtorgante(Integer telefonoOtorgante) {
+  public Consulta telefonoOtorgante(String telefonoOtorgante) {
     this.telefonoOtorgante = telefonoOtorgante;
     return this;
   }
    
   @ApiModelProperty(value = "Se presentará el teléfono de la Institución Otorgante que reporta la cuenta.")
-  public Integer getTelefonoOtorgante() {
+  public String getTelefonoOtorgante() {
     return telefonoOtorgante;
   }
-  public void setTelefonoOtorgante(Integer telefonoOtorgante) {
+  public void setTelefonoOtorgante(String telefonoOtorgante) {
     this.telefonoOtorgante = telefonoOtorgante;
   }
   public Consulta tipoCredito(String tipoCredito) {

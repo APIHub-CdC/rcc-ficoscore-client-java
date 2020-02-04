@@ -25,11 +25,11 @@ public class Empleo {
   @SerializedName("CP")
   private Integer CP = null;
   @SerializedName("numeroTelefono")
-  private Integer numeroTelefono = null;
+  private String numeroTelefono = null;
   @SerializedName("extension")
-  private Integer extension = null;
+  private String extension = null;
   @SerializedName("fax")
-  private Integer fax = null;
+  private String fax = null;
   @SerializedName("puesto")
   private String puesto = null;
   @SerializedName("fechaContratacion")
@@ -126,40 +126,40 @@ public class Empleo {
   public void setCP(Integer CP) {
     this.CP = CP;
   }
-  public Empleo numeroTelefono(Integer numeroTelefono) {
+  public Empleo numeroTelefono(String numeroTelefono) {
     this.numeroTelefono = numeroTelefono;
     return this;
   }
    
   @ApiModelProperty(value = "Debe de contener una longitud mínima de 5 caracteres. Cada carácter debe ser un número de 0-9, si se ingresa cualquier otro carácter el registro será rechazado.")
-  public Integer getNumeroTelefono() {
+  public String getNumeroTelefono() {
     return numeroTelefono;
   }
-  public void setNumeroTelefono(Integer numeroTelefono) {
+  public void setNumeroTelefono(String numeroTelefono) {
     this.numeroTelefono = numeroTelefono;
   }
-  public Empleo extension(Integer extension) {
+  public Empleo extension(String extension) {
     this.extension = extension;
     return this;
   }
    
   @ApiModelProperty(value = "Si se cuenta con la información reportar la extensión telefónica del consumidor.")
-  public Integer getExtension() {
+  public String getExtension() {
     return extension;
   }
-  public void setExtension(Integer extension) {
+  public void setExtension(String extension) {
     this.extension = extension;
   }
-  public Empleo fax(Integer fax) {
+  public Empleo fax(String fax) {
     this.fax = fax;
     return this;
   }
    
   @ApiModelProperty(value = "Mismos criterios de validación que en el elemento Número Telefónico.")
-  public Integer getFax() {
+  public String getFax() {
     return fax;
   }
-  public void setFax(Integer fax) {
+  public void setFax(String fax) {
     this.fax = fax;
   }
   public Empleo puesto(String puesto) {
