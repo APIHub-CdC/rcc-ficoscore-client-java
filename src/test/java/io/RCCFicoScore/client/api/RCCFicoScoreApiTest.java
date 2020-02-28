@@ -28,7 +28,6 @@ public class RCCFicoScoreApiTest {
 
 	private ApiClient apiClient;
 	
-
 	@Before()
 	public void setUp() {
 		this.apiClient = api.getApiClient();
