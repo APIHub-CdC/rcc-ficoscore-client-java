@@ -1,6 +1,7 @@
 # rcc-ficoscore-client-java
 
 La prueba de seguridad es un servicio "echo" que se encargará de verificar que el mensaje y la firma correspondan a tu aplicación; asi mismo retornará el mismo mensaje con nuestra respectiva firma, que también deberás verificar.
+
 ## Requisitos
 
 1. Java >= 1.7
