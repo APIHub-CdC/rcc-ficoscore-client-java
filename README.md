@@ -13,7 +13,6 @@ mvn install -Dmaven.test.skip=true
 ```
 ## Guía de inicio
 
-
 ### Paso 1. Generar llave y certificado
 
 Antes de lanzar la prueba se deberá tener un keystore para la llave privada y el certificado asociado a ésta.
