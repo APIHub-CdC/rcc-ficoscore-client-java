@@ -45,7 +45,7 @@ public class RCCFicoScoreApiTest {
 		String xApiKey = "your_api_key";
 		String username = "your_username";
 		String password = "your_password";
-		Boolean xFullReport = false;
+	
 
 		PersonaPeticion persona = new PersonaPeticion();
 		DomicilioPeticion domicilio = new DomicilioPeticion();
@@ -81,33 +81,11 @@ public class RCCFicoScoreApiTest {
 		
 		persona.setDomicilio(domicilio);
 		
-		Respuesta response = api.getReporte(xApiKey, username, password, persona, xFullReport);
+		Respuesta response = api.getReporte(xApiKey, username, password, persona);
 
 		Assert.assertTrue(response.getFolioConsulta() != null);
 		
 		logger.info(response.toString());
-
-		if (response.getFolioConsulta() != null && !xFullReport ) {
-			String folioConsulta = response.getFolioConsulta();
-
-			Consultas consultas2 = api.getConsultas(folioConsulta, xApiKey, username, password);
-			Assert.assertTrue(consultas2.getConsultas() != null);
-
-			Creditos creditos = api.getCreditos(folioConsulta, xApiKey, username, password);
-			Assert.assertTrue(creditos.getCreditos() != null);
-
-			DomiciliosRespuesta domicilios = api.getDomicilios(folioConsulta, xApiKey, username, password);
-			Assert.assertTrue(domicilios.getDomicilios() != null);
-
-			Empleos empleos = api.getEmpleos(folioConsulta, xApiKey, username, password);
-			Assert.assertTrue(empleos.getEmpleos() != null);
-
-			Scores scores = api.getScores(folioConsulta, xApiKey, username, password);
-			Assert.assertTrue(scores.getScores() != null);
-			
-			Mensajes mensajes = api.getMensajes(folioConsulta, xApiKey, username, password);
-			Assert.assertTrue(mensajes.getMensajes() != null);
-		}
 
 	}
         

@@ -1,6 +1,7 @@
 # rcc-ficoscore-client-java
 
 La prueba de seguridad es un servicio "echo" que se encargará de verificar que el mensaje y la firma correspondan a tu aplicación; asi mismo retornará el mismo mensaje con nuestra respectiva firma, que también deberás verificar.
+
 ## Requisitos
 
 1. Java >= 1.7
@@ -158,7 +159,7 @@ public void getReporteTest() throws ApiException {
 	String xApiKey = "your_api_key";
 	String username = "your_username";
 	String password = "your_password";
-	Boolean xFullReport = false;
+	
 
 	PersonaPeticion persona = new PersonaPeticion();
 	DomicilioPeticion domicilio = new DomicilioPeticion();
@@ -194,33 +195,12 @@ public void getReporteTest() throws ApiException {
 	
 	persona.setDomicilio(domicilio);
 	
-	Respuesta response = api.getReporte(xApiKey, username, password, persona, xFullReport);
+	Respuesta response = api.getReporte(xApiKey, username, password, persona);
 
 	Assert.assertTrue(response.getFolioConsulta() != null);
 	
 	logger.info(response.toString());
 
-	if (response.getFolioConsulta() != null && !xFullReport ) {
-		String folioConsulta = response.getFolioConsulta();
-
-		Consultas consultas2 = api.getConsultas(folioConsulta, xApiKey, username, password);
-		Assert.assertTrue(consultas2.getConsultas() != null);
-
-		Creditos creditos = api.getCreditos(folioConsulta, xApiKey, username, password);
-		Assert.assertTrue(creditos.getCreditos() != null);
-
-		DomiciliosRespuesta domicilios = api.getDomicilios(folioConsulta, xApiKey, username, password);
-		Assert.assertTrue(domicilios.getDomicilios() != null);
-
-		Empleos empleos = api.getEmpleos(folioConsulta, xApiKey, username, password);
-		Assert.assertTrue(empleos.getEmpleos() != null);
-
-		Scores scores = api.getScores(folioConsulta, xApiKey, username, password);
-		Assert.assertTrue(scores.getScores() != null);
-		
-		Mensajes mensajes = api.getMensajes(folioConsulta, xApiKey, username, password);
-		Assert.assertTrue(mensajes.getMensajes() != null);
-	}
 
 }	
 ```
@@ -230,3 +210,7 @@ Teniendo los pasos anteriores ya solo falta ejecutar la prueba unitaria, con el 
 ```shell
 mvn test -Dmaven.install.skip=true
 ```
+---
+[CONDICIONES DE USO, REPRODUCCIÓN Y DISTRIBUCIÓN](https://github.com/APIHub-CdC/licencias-cdc)
+
+[1]: https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos
