@@ -341,7 +341,7 @@ public class ReporteDeCrditoConFicoScoreApi {
 	}
 
 	public Call getReporteCall(String xApiKey, String username, String password, PersonaPeticion body,
-			Boolean xFullReport, final ProgressResponseBody.ProgressListener progressListener,
+			 final ProgressResponseBody.ProgressListener progressListener,
 			final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
 		Object localVarPostBody = body;
 		String localVarPath = "";
@@ -354,8 +354,7 @@ public class ReporteDeCrditoConFicoScoreApi {
 			localVarHeaderParams.put("username", apiClient.parameterToString(username));
 		if (password != null)
 			localVarHeaderParams.put("password", apiClient.parameterToString(password));
-		if (xFullReport != null)
-			localVarHeaderParams.put("x-full-report", apiClient.parameterToString(xFullReport));
+			
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 		final String[] localVarAccepts = { "application/json" };
 		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
@@ -380,7 +379,7 @@ public class ReporteDeCrditoConFicoScoreApi {
 	}
 
 	private Call getReporteValidateBeforeCall(String xApiKey, String username, String password, PersonaPeticion body,
-			Boolean xFullReport, final ProgressResponseBody.ProgressListener progressListener,
+			 final ProgressResponseBody.ProgressListener progressListener,
 			final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
 		if (xApiKey == null) {
 			throw new ApiException("Missing the required parameter 'xApiKey' when calling getReporte(Async)");
@@ -395,20 +394,20 @@ public class ReporteDeCrditoConFicoScoreApi {
 			throw new ApiException("Missing the required parameter 'body' when calling getReporte(Async)");
 		}
 
-		Call call = getReporteCall(xApiKey, username, password, body, xFullReport, progressListener,
+		Call call = getReporteCall(xApiKey, username, password, body,  progressListener,
 				progressRequestListener);
 		return call;
 	}
 
-	public Respuesta getReporte(String xApiKey, String username, String password, PersonaPeticion body,
-			Boolean xFullReport) throws ApiException {
-		ApiResponse<Respuesta> resp = getReporteWithHttpInfo(xApiKey, username, password, body, xFullReport);
+	public Respuesta getReporte(String xApiKey, String username, String password, PersonaPeticion body
+			) throws ApiException {
+		ApiResponse<Respuesta> resp = getReporteWithHttpInfo(xApiKey, username, password, body);
 		return resp.getData();
 	}
 
 	public ApiResponse<Respuesta> getReporteWithHttpInfo(String xApiKey, String username, String password,
-			PersonaPeticion body, Boolean xFullReport) throws ApiException {
-		Call call = getReporteValidateBeforeCall(xApiKey, username, password, body, xFullReport, null, null);
+			PersonaPeticion body) throws ApiException {
+		Call call = getReporteValidateBeforeCall(xApiKey, username, password, body,  null, null);
 		Type localVarReturnType = new TypeToken<Respuesta>() {
 		}.getType();
 		return apiClient.execute(call, localVarReturnType);

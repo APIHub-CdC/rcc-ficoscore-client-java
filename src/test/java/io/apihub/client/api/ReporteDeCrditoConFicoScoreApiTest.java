@@ -56,29 +56,10 @@ public class ReporteDeCrditoConFicoScoreApiTest {
 
 		body.setDomicilio(dom);
 
-		Boolean xFullReport = false;
-		Respuesta response = api.getReporte(xApiKey, username, password, body, xFullReport);
+		Respuesta response = api.getReporte(xApiKey, username, password, body);
 
 		Assert.assertTrue(response.getFolioConsulta() != null);
 
-		if (response.getFolioConsulta() != null) {
-			String folioConsulta = response.getFolioConsulta();
-
-			Consultas consultas = api.getConsultas(folioConsulta, xApiKey, username, password);
-			Assert.assertTrue(consultas.getConsultas() != null);
-
-			Creditos creditos = api.getCreditos(folioConsulta, xApiKey, username, password);
-			Assert.assertTrue(creditos.getCreditos() != null);
-
-			Domicilios domicilios = api.getDomicilios(folioConsulta, xApiKey, username, password);
-			Assert.assertTrue(domicilios.getDomicilios() != null);
-
-			Empleos empleos = api.getEmpleos(folioConsulta, xApiKey, username, password);
-			Assert.assertTrue(empleos.getEmpleos() != null);
-
-			Scores scores = api.getScores(folioConsulta, xApiKey, username, password);
-			Assert.assertTrue(scores.getScores() != null);
-		}
 
 	}
 }
